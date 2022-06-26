@@ -34,7 +34,7 @@ To create a new file without EXIF data:
 exifstrip path/to/img1.jpeg path/to/img2.heic
 ```
 
-This will create two files, `path/to/img1.jpeg.stripped` and `path/to/img2.heic.stripped`.
+This will create two files, `path/to/img1.stripped.jpeg` and `path/to/img2.stripped.heic`.
 
 To *overwrite the original file*, include the `--overwrite` flag. All files specified will be overwritten.
 
