@@ -31,7 +31,12 @@ def run():
         image_no_exif = Image.new(image.mode, image.size)
         image_no_exif.putdata(data)
 
-        destination = absolute + ("" if namespace.overwrite else ".stripped")
+        if namespace.overwrite:
+            destination = absolute
+        
+        else:
+            suffixes = "".join(image_path.suffixes)
+            destination = absolute.rstrip(suffixes) + ".stripped" + suffixes
 
         image_no_exif.save(destination)
 
