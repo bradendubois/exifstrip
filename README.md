@@ -39,5 +39,5 @@ This will create two files, `path/to/img1.stripped.jpeg` and `path/to/img2.strip
 To *overwrite the original file*, include the `--overwrite` flag. All files specified will be overwritten.
 
 ```shell
-exif-strip path/to/img1.jpeg path/to/img2.heic --overwrite
+exifstrip path/to/img1.jpeg path/to/img2.heic --overwrite
 ```
