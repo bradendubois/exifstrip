@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-
 from argparse import ArgumentParser
+from pathlib import Path
 from PIL import Image
 from pillow_heif import register_heif_opener
 
@@ -15,43 +15,31 @@ def run():
     parser.add_argument("images", nargs="*")
 
     namespace = parser.parse_args()
-    print(namespace)
+    
+    for path_string in namespace.images:
 
+        image_path = Path(path_string)
+        absolute = str(image_path.absolute())
+
+        if not (image_path.exists() and image_path.is_file()):
+            print(f"Error: {image_path} does not exist or is not a file")
+            continue
+
+        image = Image.open(absolute)
+
+        data = list(image.getdata())
+        image_no_exif = Image.new(image.mode, image.size)
+        image_no_exif.putdata(data)
+
+        destination = absolute + ("" if namespace.overwrite else ".stripped")
+
+        image_no_exif.save(destination)
+
+        # verify stripped
+        image = Image.open(Path(destination))
+        exif = image.getexif()
+        if len(exif) != 0:
+            print(f"Error: EXIF data from resulting image is not empty, has {len(exif)} entries.")
 
 if __name__ == "__main__":
     run()
-
-
-
-
-
-
-
-
-
-# image = Image.open("image-2.heic")
-
-# # next 3 lines strip exif
-# data = list(image.getdata())
-# image_without_exif = Image.new(image.mode, image.size)
-# # image_without_exif.putdata(data)
-
-# # image_without_exif.save('image_file_without_exif.jpeg')
-
-# def dump(img):
-#     exif = img.getexif()
-#     for tag_id in exif:
-#         tag = TAGS.get(tag_id, tag_id)
-#         data = exif.get(tag_id)
-#         # decode bytes 
-#         if isinstance(data, bytes):
-#             data = data.decode()
-#         print(f"{tag:25}: {data}")
-
-# print("***")
-
-# dump(image)
-# print("***")
-# dump(image_without_exif)
-
-# print("***")
