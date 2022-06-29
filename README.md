@@ -9,7 +9,7 @@ A command-line tool to strip EXIF data from images.
 
 ## Installation
 
-Install the package from [PyPI](https://pypi.org), available as [exif-strip](https://pypi.org/project/exif-strip/), using [pip](https://packaging.python.org/tutorials/installing-packages/).
+Install the package from [PyPI](https://pypi.org), available as [exifstrip](https://pypi.org/project/exifstrip/), using [pip](https://packaging.python.org/tutorials/installing-packages/).
 
 ```shell
 pip install exifstrip
